@@ -1,0 +1,28 @@
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- checkout: self
+
+- task: TerraformInstaller@1
+  displayName: 'Install Terraform'
+  inputs:
+    terraformVersion: '1.8.5'
+
+- task: AzureCLI@2
+  displayName: 'Terraform Init, Validate and Plan'
+  inputs:
+    azureSubscription: 'sc-azure-terraform'
+    scriptType: bash
+    scriptLocation: inlineScript
+    inlineScript: |
+      set -e
+      terraform init
+      terraform validate
+      terraform plan -out=tfplan
+  env:
+    ARM_USE_CLI: true
