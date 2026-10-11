@@ -1,4 +1,12 @@
-
+- task: TerraformTask@5
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendAzureRmOverrideSubscriptionID: 'f6edbd89-ccf2-49a5-8d2c-0e9c150bc931'
+    backendAzureRmResourceGroupName: 'RRMOCT'
+    backendAzureRmStorageAccountName: 'rrm101126'
+    backendAzureRmContainerName: '$logs'
+    backendAzureRmKey: 'terraform.tfstate'
 trigger:
 - main
 
